@@ -39,9 +39,12 @@ public class JFrmPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jMnuCadastros.setMnemonic('C');
         jMnuCadastros.setText("Cadastros");
 
+        jNmuUsuarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jNmuUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/usuario.png"))); // NOI18N
+        jNmuUsuarios.setMnemonic('U');
         jNmuUsuarios.setText("Usuários");
         jNmuUsuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -50,20 +53,32 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         });
         jMnuCadastros.add(jNmuUsuarios);
 
+        jNmuClientes.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jNmuClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cliente.png"))); // NOI18N
+        jNmuClientes.setMnemonic('C');
         jNmuClientes.setText("Clientes");
         jMnuCadastros.add(jNmuClientes);
 
+        jNmuFornecedor.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jNmuFornecedor.setMnemonic('F');
         jNmuFornecedor.setText("Fornecedor");
         jMnuCadastros.add(jNmuFornecedor);
         jMnuCadastros.add(jSeparator1);
 
+        jNmuSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jNmuSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/exit.png"))); // NOI18N
+        jNmuSair.setMnemonic('S');
         jNmuSair.setText("Sair");
+        jNmuSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jNmuSairActionPerformed(evt);
+            }
+        });
         jMnuCadastros.add(jNmuSair);
 
         jMenuBar1.add(jMnuCadastros);
 
+        jMnuMovimentos.setMnemonic('M');
         jMnuMovimentos.setText("Movimentos");
         jMenuBar1.add(jMnuMovimentos);
 
@@ -88,6 +103,11 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         JDlgMpvUsuarios jDlgMpvUsuarios = new JDlgMpvUsuarios(null, true);
         jDlgMpvUsuarios.setVisible(true);
     }//GEN-LAST:event_jNmuUsuariosActionPerformed
+
+    private void jNmuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNmuSairActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jNmuSairActionPerformed
 
     /**
      * @param args the command line arguments
