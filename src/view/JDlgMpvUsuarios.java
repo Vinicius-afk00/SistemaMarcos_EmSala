@@ -298,7 +298,7 @@ public class JDlgMpvUsuarios extends javax.swing.JDialog {
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showConfirmDialog(null, "Confirma a exclusão");
+        JOptionPane.showConfirmDialog(null, "Confirma a exclusão", "Selecione uma opção", JOptionPane.YES_NO_OPTION);
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
