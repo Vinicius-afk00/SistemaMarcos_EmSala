@@ -44,9 +44,9 @@ public class DaoMpvUsuarios extends DaoAbstract{
             pst.executeUpdate();
             
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(JdbcSelect.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DaoMpvUsuarios.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(JdbcSelect.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DaoMpvUsuarios.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
