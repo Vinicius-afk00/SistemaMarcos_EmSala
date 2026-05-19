@@ -7,6 +7,7 @@ package view;
 import bean.MpvUsuarios;
 import dao.DaoMpvUsuarios;
 import javax.swing.JOptionPane;
+import util.Conversor;
 
 /**
  *
@@ -36,7 +37,7 @@ public class JDlgMpvUsuarios extends javax.swing.JDialog {
     }
     
     public void habilitar() {
-        jTxtCodigo.setEnabled(true);
+        jTxtCodigo.setEnabled(false);
         jTxtNome.setEnabled(true);
         jTxtApelido.setEnabled(true);
         jFmtCpf.setEnabled(true);
@@ -296,17 +297,20 @@ public class JDlgMpvUsuarios extends javax.swing.JDialog {
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
         MpvUsuarios user = new MpvUsuarios();
-        user.setMpvIdUsuarios(Integer.parseInt(jTxtCodigo.getText()));
+        //user.setMpvIdUsuarios(Integer.parseInt(jTxtCodigo.getText()));
         user.setMpvNome(jTxtNome.getText());
         user.setMpvApelido(jTxtApelido.getText());
         user.setMpvCpf(jFmtCpf.getText());
-        user.setMpvDataNascimento(jFmtDataNascimento.getText());
-        user.setMpvNivel(jCboNivel.getSelectedIndex());
+        user.setMpvDataNascimento(Conversor.TextoToDate(jFmtDataNascimento.getText()));
+        user.setMpvNivel(jCboNivel.getSelectedIndex()+1);
         user.setMpvSenha(new String(jPwfSenha.getPassword()));
-        user.setMpvAtivo(jChbAtivo.getText());
-        
+        user.setMpvAtivo(jChbAtivo.isSelected()? "S" : "N");
         DaoMpvUsuarios dao = new DaoMpvUsuarios();
-        dao.insert(user);
+        if(dao.insert(user))
+            JOptionPane.showMessageDialog(this, "Usuário cadastrado com sucesso!");
+        else
+            JOptionPane.showMessageDialog(this, "Erro ao cadastrar!");
+        
         
         desabilitar();
     }//GEN-LAST:event_jBtnConfirmarActionPerformed

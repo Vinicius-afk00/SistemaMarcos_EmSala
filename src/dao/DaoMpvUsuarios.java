@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import testes.JdbcSelect;
@@ -21,7 +22,7 @@ import testes.JdbcSelect;
 public class DaoMpvUsuarios extends DaoAbstract{
 
     @Override
-    public void insert(Object object) {
+    public boolean insert(Object object) {
         MpvUsuarios mpvUsuarios = (MpvUsuarios) object;
        try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -31,23 +32,26 @@ public class DaoMpvUsuarios extends DaoAbstract{
             password = "marcos_vilhanueva";
             Connection cnt;
             cnt = DriverManager.getConnection(url, user, password);
-            String sql = "insert into mpv_usuarios values(?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO mpv_usuarios "
+                    + "(mpv_nome, mpv_apelido, mpv_cpf, mpv_dataNascimento, mpv_nivel, mpv_senha, mpv_ativo)"
+                    + " VALUES (?,?,?,?,?,?,?);";
             PreparedStatement pst = cnt.prepareStatement(sql);
-            pst.setInt(1, mpvUsuarios.getMpvIdUsuarios());
-            pst.setString(2, mpvUsuarios.getMpvNome());
-            pst.setString(3, mpvUsuarios.getMpvApelido());
-            pst.setString(4, mpvUsuarios.getMpvCpf());
-            pst.setDate(5, null);//mpv_dta_nascimento
-            pst.setInt(6, mpvUsuarios.getMpvNivel());
-            pst.setString(7, mpvUsuarios.getMpvSenha());
-            pst.setString(8, mpvUsuarios.getMpvAtivo());
+            //pst.setInt(1, mpvUsuarios.getMpvIdUsuarios());
+            pst.setString(1, mpvUsuarios.getMpvNome());
+            pst.setString(2, mpvUsuarios.getMpvApelido());
+            pst.setString(3, mpvUsuarios.getMpvCpf());
+            pst.setDate(4, (Date) mpvUsuarios.getMpvDataNascimento());//mpv_dta_nascimento
+            pst.setInt(5, mpvUsuarios.getMpvNivel());
+            pst.setString(6, mpvUsuarios.getMpvSenha());
+            pst.setString(7, mpvUsuarios.getMpvAtivo());
             pst.executeUpdate();
             
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DaoMpvUsuarios.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(DaoMpvUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
+       
+       return true;
     }
 
     @Override

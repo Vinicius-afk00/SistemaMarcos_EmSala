@@ -15,7 +15,7 @@ public class MpvUsuarios {
     private String mpvNome;
     private String mpvApelido;
     private String mpvCpf;
-    private String mpvDataNascimento;
+    private Date mpvDataNascimento;
     private int mpvNivel;
     private String mpvSenha;
     private String mpvAtivo;
@@ -79,14 +79,14 @@ public class MpvUsuarios {
     /**
      * @return the mpvDataNascimento
      */
-    public String getMpvDataNascimento() {
+    public Date getMpvDataNascimento() {
         return mpvDataNascimento;
     }
 
     /**
      * @param mpvDataNascimento the mpvDataNascimento to set
      */
-    public void setMpvDataNascimento(String mpvDataNascimento) {
+    public void setMpvDataNascimento(Date mpvDataNascimento) {
         this.mpvDataNascimento = mpvDataNascimento;
     }
 
