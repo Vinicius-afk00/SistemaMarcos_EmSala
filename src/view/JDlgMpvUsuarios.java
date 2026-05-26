@@ -317,7 +317,31 @@ public class JDlgMpvUsuarios extends javax.swing.JDialog {
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showConfirmDialog(null, "Confirma a exclusão", "Selecione uma opção", JOptionPane.YES_NO_OPTION);
+        
+        int id = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o código do usuário"));
+        DaoMpvUsuarios dao = new DaoMpvUsuarios();
+        MpvUsuarios usuario = (MpvUsuarios) dao.list(id);
+        
+        if(usuario==null){
+            JOptionPane.showInputDialog(this, "usuarios não encontrado!");
+        }else{
+            jTxtCodigo.setText(String.valueOf(usuario.getMpvIdUsuarios()));
+            jTxtNome.setText(usuario.getMpvNome());
+            jTxtApelido.setText(usuario.getMpvApelido());
+            jCboNivel.setSelectedItem(usuario.getMpvNivel());
+            jChbAtivo.setSelected("S".equals(usuario.getMpvAtivo()));
+            jFmtCpf.setText(usuario.getMpvCpf());
+            jFmtDataNascimento.setText("");
+            jPwfSenha.setText(usuario.getMpvSenha());
+            
+            int resp = JOptionPane.showConfirmDialog(null, "Deseja Excluir " + usuario.getMpvNome()+" ?", "Confirma", JOptionPane.YES_NO_OPTION);
+            
+            if(resp==JOptionPane.YES_OPTION){
+                dao.delete(usuario.getMpvIdUsuarios());
+            }
+            
+        }
+        
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
