@@ -65,12 +65,35 @@ public class DaoMpvUsuarios extends DaoAbstract{
 
     @Override
     public void update(Object object) {
-        
+        try {
+            MpvUsuarios mpvUsuarios = (MpvUsuarios) object;
+            String sql = "UPDATE mpv_usuarios SET mpv_nome=?, mpv_apelido=?, mpv_cpf=?, mpv_dataNascimento=?, mpv_nivel=?, mpv_senha=?, mpv_ativo=? WHERE mpv_idusuarios=?";
+            PreparedStatement pst = cnt.prepareStatement(sql);
+            pst.setString(1, mpvUsuarios.getMpvNome());
+            pst.setString(2, mpvUsuarios.getMpvApelido());
+            pst.setString(3, mpvUsuarios.getMpvCpf());
+            pst.setDate(4, (Date) mpvUsuarios.getMpvDataNascimento());//mpv_dta_nascimento
+            pst.setInt(5, mpvUsuarios.getMpvNivel());
+            pst.setString(6, mpvUsuarios.getMpvSenha());
+            pst.setString(7, mpvUsuarios.getMpvAtivo());
+            pst.setInt(8, mpvUsuarios.getMpvIdUsuarios());
+            pst.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoMpvUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public void delete(Object object) {
-        
+        try {
+            MpvUsuarios mpvUsuarios = (MpvUsuarios) object;
+            String sql = "DELETE FROM mpv_usuarios WHERE mpv_idusuarios=?";
+            PreparedStatement smt = cnt.prepareStatement(sql);
+            smt.setInt(1, mpvUsuarios.getMpvIdUsuarios());
+            smt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoMpvUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override

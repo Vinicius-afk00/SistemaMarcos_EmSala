@@ -14,7 +14,7 @@ import util.Conversor;
  * @author u1845853
  */
 public class JDlgMpvUsuarios extends javax.swing.JDialog {
-
+       boolean alterar = false;
     /**
      * Creates new form JDlgMpvUsuarios
      */
@@ -291,13 +291,32 @@ public class JDlgMpvUsuarios extends javax.swing.JDialog {
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
+        alterar = true;
+        
+        int id = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o código do usuário"));
+        DaoMpvUsuarios dao = new DaoMpvUsuarios();
+        MpvUsuarios usuario = (MpvUsuarios) dao.list(id);
+        
+        if(usuario==null){
+            JOptionPane.showInputDialog(this, "usuarios não encontrado!");
+        }else{
+            jTxtCodigo.setText(String.valueOf(usuario.getMpvIdUsuarios()));
+            jTxtNome.setText(usuario.getMpvNome());
+            jTxtApelido.setText(usuario.getMpvApelido());
+            jCboNivel.setSelectedItem(usuario.getMpvNivel());
+            jChbAtivo.setSelected("S".equals(usuario.getMpvAtivo()));
+            jFmtCpf.setText(usuario.getMpvCpf());
+            jFmtDataNascimento.setText("");
+            jPwfSenha.setText(usuario.getMpvSenha());
+        }
+        
         habilitar();
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
         MpvUsuarios user = new MpvUsuarios();
-        //user.setMpvIdUsuarios(Integer.parseInt(jTxtCodigo.getText()));
+        if(alterar) user.setMpvIdUsuarios(Integer.parseInt(jTxtCodigo.getText()));
         user.setMpvNome(jTxtNome.getText());
         user.setMpvApelido(jTxtApelido.getText());
         user.setMpvCpf(jFmtCpf.getText());
@@ -306,12 +325,15 @@ public class JDlgMpvUsuarios extends javax.swing.JDialog {
         user.setMpvSenha(new String(jPwfSenha.getPassword()));
         user.setMpvAtivo(jChbAtivo.isSelected()? "S" : "N");
         DaoMpvUsuarios dao = new DaoMpvUsuarios();
-        if(dao.insert(user))
-            JOptionPane.showMessageDialog(this, "Usuário cadastrado com sucesso!");
-        else
-            JOptionPane.showMessageDialog(this, "Erro ao cadastrar!");
         
-        
+        if(alterar){
+          dao.update(user);
+        }else{
+            if(dao.insert(user))
+                JOptionPane.showMessageDialog(this, "Usuário cadastrado com sucesso!");
+            else
+                JOptionPane.showMessageDialog(this, "Erro ao cadastrar!");
+        }
         desabilitar();
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
@@ -337,7 +359,8 @@ public class JDlgMpvUsuarios extends javax.swing.JDialog {
             int resp = JOptionPane.showConfirmDialog(null, "Deseja Excluir " + usuario.getMpvNome()+" ?", "Confirma", JOptionPane.YES_NO_OPTION);
             
             if(resp==JOptionPane.YES_OPTION){
-                dao.delete(usuario.getMpvIdUsuarios());
+                dao.delete(usuario);
+                JOptionPane.showMessageDialog(rootPane, "Excluído comsucesso!");
             }
             
         }
