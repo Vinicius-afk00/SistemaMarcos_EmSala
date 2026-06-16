@@ -4,13 +4,15 @@
  */
 package dao;
 
-import bean.MpvUsuarios;
+import model.MpvUsuarios;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import testes.JdbcSelect;
@@ -128,7 +130,30 @@ public class DaoMpvUsuarios extends DaoAbstract{
 
     @Override
     public Object listAll() {
-        return null;
+        List<MpvUsuarios> lista = new ArrayList<>();
+        try {
+            String sql = "Select * from mpv_usuarios";
+            
+            PreparedStatement smt = cnt.prepareStatement(sql);
+            ResultSet rs = smt.executeQuery();
+            
+            while(rs.next()){
+                MpvUsuarios usuario = new MpvUsuarios();
+                
+                usuario.setMpvIdUsuarios(rs.getInt("mpv_idusuarios"));
+                usuario.setMpvNome(rs.getString("mpv_nome"));
+                usuario.setMpvApelido(rs.getString("mpv_apelido"));
+                usuario.setMpvCpf(rs.getString("mpv_cpf"));
+                usuario.setMpvDataNascimento(rs.getDate("mpv_dataNascimento"));
+                usuario.setMpvNivel(rs.getInt("mpv_nivel"));
+                usuario.setMpvSenha(rs.getString("mpv_senha"));
+                usuario.setMpvAtivo(rs.getString("mpv_ativo"));
+                lista.add(usuario);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoMpvUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
     }
     
     
