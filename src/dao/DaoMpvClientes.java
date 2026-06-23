@@ -7,11 +7,13 @@ package dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.MpvClientes;
-
 /**
  *
  * @author Vinicius
@@ -59,22 +61,83 @@ public class DaoMpvClientes extends DaoAbstract{
 
     @Override
     public void update(Object object) {
-        
+        try {
+            MpvClientes mpvClientes = (MpvClientes) object;
+            String sql = "UPDATE clientes SET nome=?, cpf=?, email=?, telefone=? WHERE id_cliente=?";
+            PreparedStatement pst = cnt.prepareStatement(sql);
+            pst.setString(1, mpvClientes.getNome());
+            pst.setString(2, mpvClientes.getCpf());
+            pst.setString(3, mpvClientes.getEmail());
+            pst.setString(4, mpvClientes.getTelefone());
+            pst.setInt(5, mpvClientes.getId_cliete());
+            pst.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoMpvClientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public void delete(Object object) {
-        
+        try {
+            MpvClientes mpvClientes = (MpvClientes) object;
+            String sql = "DELETE FROM clientes WHERE id_cliente=?";
+            PreparedStatement smt = cnt.prepareStatement(sql);
+            smt.setInt(1, mpvClientes.getId_cliete());
+            smt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoMpvClientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public Object list(int id) {
-        return null;
+        try {
+            String sql = "SELECT * FROM clientes WHERE id_cliente=?";
+            MpvClientes cliente = null;
+            
+            PreparedStatement pst = cnt.prepareStatement(sql);
+            pst.setInt(1, id);
+            
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()){
+                cliente = new MpvClientes();
+                
+                cliente.setId_cliete(rs.getInt("id_cliente"));
+                cliente.setNome(rs.getString("nome"));
+                cliente.setCpf(rs.getString("cpf"));
+                cliente.setEmail(rs.getString("email"));
+                cliente.setTelefone(rs.getString("telefone"));
+            }
+            
+            return cliente ;
+        } catch (SQLException ex) {
+            return null;
+        }
     }
 
     @Override
     public Object listAll() {
-        return null;
+        List<MpvClientes> lista = new ArrayList<>();
+        try {
+            String sql = "Select * from clientes";
+            
+            PreparedStatement smt = cnt.prepareStatement(sql);
+            ResultSet rs = smt.executeQuery();
+            
+            while(rs.next()){
+                MpvClientes cliente = new MpvClientes();
+                
+                cliente.setId_cliete(rs.getInt("id_cliente"));
+                cliente.setNome(rs.getString("nome"));
+                cliente.setCpf(rs.getString("cpf"));
+                cliente.setEmail(rs.getString("email"));
+                cliente.setTelefone(rs.getString("telefone"));
+                lista.add(cliente);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoMpvClientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
     }
     
 }

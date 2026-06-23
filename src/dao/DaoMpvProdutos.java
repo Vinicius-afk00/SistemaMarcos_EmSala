@@ -5,10 +5,12 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.MpvProdutos;
@@ -40,10 +42,9 @@ public class DaoMpvProdutos extends DaoAbstract{
         try {
             
             String sql = "INSERT INTO produtos "
-                    + "(id_poduto, descricao, tipo, unidade, preco)"
+                    + "(id_produto, descricao, tipo, unidade, preco)"
                     + " VALUES (?,?,?,?,?);";
             PreparedStatement pst = cnt.prepareStatement(sql);
-            //pst.setInt(1, mpvUsuarios.getMpvIdUsuarios());
             pst.setInt(1, mpvProdutos.getId_produto());
             pst.setString(2, mpvProdutos.getDescricao());
             pst.setString(3, mpvProdutos.getTipo());
@@ -61,22 +62,83 @@ public class DaoMpvProdutos extends DaoAbstract{
 
     @Override
     public void update(Object object) {
-        
+        try {
+            MpvProdutos mpvProdutos = (MpvProdutos) object;
+            String sql = "UPDATE produtos SET descricao=?, tipo=?, unidade=?, preco=? WHERE id_produto=?";
+            PreparedStatement pst = cnt.prepareStatement(sql);
+            pst.setInt(1, mpvProdutos.getId_produto());
+            pst.setString(2, mpvProdutos.getDescricao());
+            pst.setString(3, mpvProdutos.getTipo());
+            pst.setString(4, mpvProdutos.getUnidade());
+            pst.setString(5, mpvProdutos.getPreco());
+            pst.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoMpvProdutos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public void delete(Object object) {
-        
+        try {
+            MpvProdutos mpvProdutos = (MpvProdutos) object;
+            String sql = "DELETE FROM produtos WHERE id_produto=?";
+            PreparedStatement smt = cnt.prepareStatement(sql);
+            smt.setInt(1, mpvProdutos.getId_produto());
+            smt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoMpvProdutos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public Object list(int id) {
-        return null;
+        try {
+            String sql = "SELECT * FROM produtos WHERE id_produto=?";
+            MpvProdutos produto = null;
+            
+            PreparedStatement pst = cnt.prepareStatement(sql);
+            pst.setInt(1, id);
+            
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()){
+                produto = new MpvProdutos();
+                
+                produto.setId_produto(rs.getInt("id_produto"));
+                produto.setDescricao(rs.getString("descricao"));
+                produto.setTipo(rs.getString("tipo"));
+                produto.setUnidade(rs.getString("unidade"));
+                produto.setPreco(rs.getString("preco"));
+            }
+            
+            return produto ;
+        } catch (SQLException ex) {
+            return null;
+        }
     }
 
     @Override
     public Object listAll() {
-        return null;
+        List<MpvProdutos> lista = new ArrayList<>();
+        try {
+            String sql = "Select * from produtos";
+            
+            PreparedStatement smt = cnt.prepareStatement(sql);
+            ResultSet rs = smt.executeQuery();
+            
+            while(rs.next()){
+                MpvProdutos produto = new MpvProdutos();
+                
+                produto.setId_produto(rs.getInt("id_produto"));
+                produto.setDescricao(rs.getString("descricao"));
+                produto.setTipo(rs.getString("tipo"));
+                produto.setUnidade(rs.getString("unidade"));
+                produto.setPreco(rs.getString("preco"));
+                lista.add(produto);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoMpvProdutos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
     }
     
 }

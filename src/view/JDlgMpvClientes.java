@@ -4,7 +4,9 @@
  */
 package view;
 
+import dao.DaoMpvClientes;
 import javax.swing.JOptionPane;
+import model.MpvClientes;
 
 /**
  *
@@ -250,20 +252,17 @@ public class JDlgMpvClientes extends javax.swing.JDialog {
         alterar = true;
 
         int id = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o código do usuário"));
-        DaoMpvUsuarios dao = new DaoMpvUsuarios();
-        MpvUsuarios usuario = (MpvUsuarios) dao.list(id);
+        DaoMpvClientes dao = new DaoMpvClientes();
+        MpvClientes clientes = (MpvClientes) dao.list(id);
 
-        if(usuario==null){
+        if(clientes==null){
             JOptionPane.showInputDialog(this, "usuarios não encontrado!");
         }else{
-            jTxtCodigo.setText(String.valueOf(usuario.getMpvIdUsuarios()));
-            jTxtNome.setText(usuario.getMpvNome());
-            jTxtApelido.setText(usuario.getMpvApelido());
-            jCboNivel.setSelectedItem(usuario.getMpvNivel());
-            jChbAtivo.setSelected("S".equals(usuario.getMpvAtivo()));
-            jFmtCpf.setText(usuario.getMpvCpf());
-            jFmtDataNascimento.setText("");
-            jPwfSenha.setText(usuario.getMpvSenha());
+            jTxtCodigo.setText(String.valueOf(clientes.getId_cliete()));
+            jTxtNome.setText(clientes.getNome());
+            jTxtEmail.setText(clientes.getNome());
+            jFmtCpf.setText(clientes.getCpf());
+            jFmtTelefone.setText(clientes.getTelefone());
         }
 
         habilitar();
@@ -271,21 +270,18 @@ public class JDlgMpvClientes extends javax.swing.JDialog {
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
-        MpvUsuarios user = new MpvUsuarios();
-        if(alterar) user.setMpvIdUsuarios(Integer.parseInt(jTxtCodigo.getText()));
-        user.setMpvNome(jTxtNome.getText());
-        user.setMpvApelido(jTxtApelido.getText());
-        user.setMpvCpf(jFmtCpf.getText());
-        user.setMpvDataNascimento(Conversor.TextoToDate(jFmtDataNascimento.getText()));
-        user.setMpvNivel(jCboNivel.getSelectedIndex()+1);
-        user.setMpvSenha(new String(jPwfSenha.getPassword()));
-        user.setMpvAtivo(jChbAtivo.isSelected()? "S" : "N");
-        DaoMpvUsuarios dao = new DaoMpvUsuarios();
+        MpvClientes cliente = new MpvClientes();
+        if(alterar) cliente.setId_cliete(Integer.parseInt(jTxtCodigo.getText()));
+        cliente.setNome(jTxtNome.getText());
+        cliente.setEmail(jTxtEmail.getText());
+        cliente.setCpf(jFmtCpf.getText());
+        cliente.setTelefone(jFmtTelefone.getText());
+        DaoMpvClientes dao = new DaoMpvClientes();
 
         if(alterar){
-            dao.update(user);
+            dao.update(cliente);
         }else{
-            if(dao.insert(user))
+            if(dao.insert(cliente))
             JOptionPane.showMessageDialog(this, "Usuário cadastrado com sucesso!");
             else
             JOptionPane.showMessageDialog(this, "Erro ao cadastrar!");
@@ -297,25 +293,22 @@ public class JDlgMpvClientes extends javax.swing.JDialog {
         // TODO add your handling code here:
 
         int id = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o código do usuário"));
-        DaoMpvUsuarios dao = new DaoMpvUsuarios();
-        MpvUsuarios usuario = (MpvUsuarios) dao.list(id);
+        DaoMpvClientes dao = new DaoMpvClientes();
+        MpvClientes clientes = (MpvClientes) dao.list(id);
 
-        if(usuario==null){
+        if(clientes==null){
             JOptionPane.showInputDialog(this, "usuarios não encontrado!");
         }else{
-            jTxtCodigo.setText(String.valueOf(usuario.getMpvIdUsuarios()));
-            jTxtNome.setText(usuario.getMpvNome());
-            jTxtApelido.setText(usuario.getMpvApelido());
-            jCboNivel.setSelectedItem(usuario.getMpvNivel());
-            jChbAtivo.setSelected("S".equals(usuario.getMpvAtivo()));
-            jFmtCpf.setText(usuario.getMpvCpf());
-            jFmtDataNascimento.setText("");
-            jPwfSenha.setText(usuario.getMpvSenha());
+            jTxtCodigo.setText(String.valueOf(clientes.getId_cliete()));
+            jTxtNome.setText(clientes.getNome());
+            jTxtEmail.setText(clientes.getNome());
+            jFmtCpf.setText(clientes.getCpf());
+            jFmtTelefone.setText(clientes.getTelefone());
 
-            int resp = JOptionPane.showConfirmDialog(null, "Deseja Excluir " + usuario.getMpvNome()+" ?", "Confirma", JOptionPane.YES_NO_OPTION);
+            int resp = JOptionPane.showConfirmDialog(null, "Deseja Excluir " + clientes.getNome()+" ?", "Confirma", JOptionPane.YES_NO_OPTION);
 
             if(resp==JOptionPane.YES_OPTION){
-                dao.delete(usuario);
+                dao.delete(clientes);
                 JOptionPane.showMessageDialog(rootPane, "Excluído com sucesso!");
             }
 
@@ -326,7 +319,7 @@ public class JDlgMpvClientes extends javax.swing.JDialog {
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
         // TODO add your handling code here:
         JDlgMpvList jDlgMpvList = new JDlgMpvList(null, true);
-        jDlgMpvList.setTelaUsuario(this);
+        jDlgMpvList.setTelaUsuario(tela);
         jDlgMpvList.setVisible(true);
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 

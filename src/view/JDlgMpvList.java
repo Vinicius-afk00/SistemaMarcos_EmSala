@@ -5,6 +5,8 @@
 package view;
 
 import dao.DaoMpvUsuarios;
+import dao.DaoMpvClientes;
+import dao.DaoMpvProdutos;
 import java.util.List;
 
 /**
@@ -17,6 +19,8 @@ public class JDlgMpvList extends javax.swing.JDialog {
      * Creates new form JDlgMpvList
      */
     JDlgMpvUsuarios jDlgMpvUsuarios;
+    JDlgMpvClientes jDlgMpvClientes;
+    JDlgMpvProdutos jDlgMpvProdutos;
     UsuarioTableModel tabelaDados;
     public JDlgMpvList(java.awt.Frame parent, boolean modal) {
         super(parent, modal);

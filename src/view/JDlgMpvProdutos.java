@@ -4,7 +4,9 @@
  */
 package view;
 
+import dao.DaoMpvProdutos;
 import javax.swing.JOptionPane;
+import model.MpvProdutos;
 
 /**
  *
@@ -20,23 +22,21 @@ public class JDlgMpvProdutos extends javax.swing.JDialog {
         initComponents();
         setTitle("Cadastro de Produtos");
         setLocationRelativeTo(null);
-        jCboTipo.setEnabled(false);
         jTxtCodigo.setEnabled(false);
-        jTxtCor.setEnabled(false);
         jTxtDescri.setEnabled(false);
-        jTxtLocali.setEnabled(false);
-        jTxtNome.setEnabled(false);
+        jCboTipo.setEnabled(false);
+        jFmtUnidade.setEnabled(false);
+        jFmtPreco.setEnabled(false);
         jBtnConfirmar.setEnabled(false);
         jBtnCancelar.setEnabled(false);
     }
     
     public void habilitar(){
-        jCboTipo.setEnabled(false);
         jTxtCodigo.setEnabled(false);
-        jTxtCor.setEnabled(false);
         jTxtDescri.setEnabled(false);
-        jTxtLocali.setEnabled(false);
-        jTxtNome.setEnabled(false);
+        jCboTipo.setEnabled(false);
+        jFmtUnidade.setEnabled(false);
+        jFmtPreco.setEnabled(false);
         jBtnConfirmar.setEnabled(false);
         jBtnCancelar.setEnabled(false);
         
@@ -47,12 +47,11 @@ public class JDlgMpvProdutos extends javax.swing.JDialog {
     }
     
     public void desabilitar(){
-        jCboTipo.setEnabled(false);
         jTxtCodigo.setEnabled(false);
-        jTxtCor.setEnabled(false);
         jTxtDescri.setEnabled(false);
-        jTxtLocali.setEnabled(false);
-        jTxtNome.setEnabled(false);
+        jCboTipo.setEnabled(false);
+        jFmtUnidade.setEnabled(false);
+        jFmtPreco.setEnabled(false);
         jBtnConfirmar.setEnabled(false);
         jBtnCancelar.setEnabled(false);
         
@@ -73,36 +72,24 @@ public class JDlgMpvProdutos extends javax.swing.JDialog {
 
         jLabel1 = new javax.swing.JLabel();
         jTxtCodigo = new javax.swing.JTextField();
-        jTxtNome = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jTxtDescri = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jTxtLocali = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jTxtCor = new javax.swing.JTextField();
         jBtnCancelar = new javax.swing.JButton();
         jBtnIncluir = new javax.swing.JButton();
         jBtnAlterar = new javax.swing.JButton();
         jBtnConfirmar = new javax.swing.JButton();
         jBtnExcluir = new javax.swing.JButton();
         jBtnPesquisar = new javax.swing.JButton();
+        jTxtDescri = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jCboTipo = new javax.swing.JComboBox<>();
+        jFmtUnidade = new javax.swing.JFormattedTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jFmtPreco = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Código");
-
-        jLabel2.setText("Nome");
-
-        jLabel3.setText("Decrição");
-
-        jLabel4.setText("Localização");
-
-        jLabel5.setText("Tipo");
-
-        jLabel6.setText("Cor");
 
         jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jBtnCancelar.setText("Cancelar");
@@ -152,7 +139,15 @@ public class JDlgMpvProdutos extends javax.swing.JDialog {
             }
         });
 
+        jLabel2.setText("Descrição");
+
+        jLabel3.setText("Tipo");
+
         jCboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel4.setText("Unidade");
+
+        jLabel5.setText("Preco");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -162,42 +157,38 @@ public class JDlgMpvProdutos extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
+                        .addComponent(jTxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTxtDescri))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jCboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jFmtUnidade))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jTxtNome)))
-                    .addComponent(jTxtDescri)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTxtLocali, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1)
+                                .addGap(80, 80, 80)
+                                .addComponent(jLabel2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jBtnIncluir)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBtnAlterar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBtnExcluir)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBtnConfirmar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBtnCancelar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBtnPesquisar))
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
+                                .addGap(302, 302, 302)
                                 .addComponent(jLabel4))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addGap(0, 0, Short.MAX_VALUE))
-                                .addComponent(jCboTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addComponent(jLabel6)
-                        .addComponent(jTxtCor, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jBtnIncluir)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jBtnAlterar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jBtnExcluir)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jBtnConfirmar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jBtnCancelar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jBtnPesquisar))))
+                            .addComponent(jLabel5)
+                            .addComponent(jFmtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -210,24 +201,20 @@ public class JDlgMpvProdutos extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTxtDescri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTxtDescri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTxtLocali, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTxtCor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFmtUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jFmtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jBtnCancelar)
@@ -259,20 +246,17 @@ public class JDlgMpvProdutos extends javax.swing.JDialog {
         alterar = true;
 
         int id = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o código do usuário"));
-        DaoMpvUsuarios dao = new DaoMpvUsuarios();
-        MpvUsuarios usuario = (MpvUsuarios) dao.list(id);
+        DaoMpvProdutos dao = new DaoMpvProdutos();
+        MpvProdutos produto = (MpvProdutos) dao.list(id);
 
-        if(usuario==null){
+        if(produto==null){
             JOptionPane.showInputDialog(this, "usuarios não encontrado!");
         }else{
-            jTxtCodigo.setText(String.valueOf(usuario.getMpvIdUsuarios()));
-            jTxtNome.setText(usuario.getMpvNome());
-            jTxtApelido.setText(usuario.getMpvApelido());
-            jCboNivel.setSelectedItem(usuario.getMpvNivel());
-            jChbAtivo.setSelected("S".equals(usuario.getMpvAtivo()));
-            jFmtCpf.setText(usuario.getMpvCpf());
-            jFmtDataNascimento.setText("");
-            jPwfSenha.setText(usuario.getMpvSenha());
+            jTxtCodigo.setText(String.valueOf(produto.getId_produto()));
+            jTxtDescri.setText(produto.getDescricao());
+            jCboTipo.setSelectedItem(produto.getTipo());
+            jFmtUnidade.setText(produto.getUnidade());
+            jFmtPreco.setText(produto.getPreco());
         }
 
         habilitar();
@@ -280,21 +264,18 @@ public class JDlgMpvProdutos extends javax.swing.JDialog {
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
-        MpvUsuarios user = new MpvUsuarios();
-        if(alterar) user.setMpvIdUsuarios(Integer.parseInt(jTxtCodigo.getText()));
-        user.setMpvNome(jTxtNome.getText());
-        user.setMpvApelido(jTxtApelido.getText());
-        user.setMpvCpf(jFmtCpf.getText());
-        user.setMpvDataNascimento(Conversor.TextoToDate(jFmtDataNascimento.getText()));
-        user.setMpvNivel(jCboNivel.getSelectedIndex()+1);
-        user.setMpvSenha(new String(jPwfSenha.getPassword()));
-        user.setMpvAtivo(jChbAtivo.isSelected()? "S" : "N");
-        DaoMpvUsuarios dao = new DaoMpvUsuarios();
+        MpvProdutos produto = new MpvProdutos();
+        if(alterar) produto.setId_produto(Integer.parseInt(jTxtCodigo.getText()));
+        produto.setDescricao(jTxtDescri.getText());
+        produto.setTipo(jCboTipo.getSelectedIndex()+1);
+        produto.setUnidade(jFmtUnidade.getText());
+        produto.setPreco(jFmtPreco.getText());
+        DaoMpvProdutos dao = new DaoMpvProdutos();
 
         if(alterar){
-            dao.update(user);
+            dao.update(produto);
         }else{
-            if(dao.insert(user))
+            if(dao.insert(produto))
             JOptionPane.showMessageDialog(this, "Usuário cadastrado com sucesso!");
             else
             JOptionPane.showMessageDialog(this, "Erro ao cadastrar!");
@@ -306,25 +287,22 @@ public class JDlgMpvProdutos extends javax.swing.JDialog {
         // TODO add your handling code here:
 
         int id = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o código do usuário"));
-        DaoMpvUsuarios dao = new DaoMpvUsuarios();
-        MpvUsuarios usuario = (MpvUsuarios) dao.list(id);
+        DaoMpvProdutos dao = new DaoMpvProdutos();
+        MpvProdutos produto = (MpvProdutos) dao.list(id);
 
-        if(usuario==null){
+        if(produto==null){
             JOptionPane.showInputDialog(this, "usuarios não encontrado!");
         }else{
-            jTxtCodigo.setText(String.valueOf(usuario.getMpvIdUsuarios()));
-            jTxtNome.setText(usuario.getMpvNome());
-            jTxtApelido.setText(usuario.getMpvApelido());
-            jCboNivel.setSelectedItem(usuario.getMpvNivel());
-            jChbAtivo.setSelected("S".equals(usuario.getMpvAtivo()));
-            jFmtCpf.setText(usuario.getMpvCpf());
-            jFmtDataNascimento.setText("");
-            jPwfSenha.setText(usuario.getMpvSenha());
+            jTxtCodigo.setText(String.valueOf(produto.getId_produto()));
+            jTxtDescri.setText(produto.getDescricao());
+            jCboTipo.setSelectedItem(produto.getTipo());
+            jFmtUnidade.setText(produto.getUnidade());
+            jFmtPreco.setText(produto.getPreco());
 
-            int resp = JOptionPane.showConfirmDialog(null, "Deseja Excluir " + usuario.getMpvNome()+" ?", "Confirma", JOptionPane.YES_NO_OPTION);
+            int resp = JOptionPane.showConfirmDialog(null, "Deseja Excluir " + produto.getDescricao()+" ?", "Confirma", JOptionPane.YES_NO_OPTION);
 
             if(resp==JOptionPane.YES_OPTION){
-                dao.delete(usuario);
+                dao.delete(produto);
                 JOptionPane.showMessageDialog(rootPane, "Excluído com sucesso!");
             }
 
@@ -334,7 +312,7 @@ public class JDlgMpvProdutos extends javax.swing.JDialog {
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
         // TODO add your handling code here:
         JDlgMpvList jDlgMpvList = new JDlgMpvList(null, true);
-        jDlgMpvList.setTelaUsuario(this);
+        jDlgMpvList.setTelaUsuario(tela);
         jDlgMpvList.setVisible(true);
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
@@ -388,16 +366,14 @@ public class JDlgMpvProdutos extends javax.swing.JDialog {
     private javax.swing.JButton jBtnIncluir;
     private javax.swing.JButton jBtnPesquisar;
     private javax.swing.JComboBox<String> jCboTipo;
+    private javax.swing.JFormattedTextField jFmtPreco;
+    private javax.swing.JFormattedTextField jFmtUnidade;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField jTxtCodigo;
-    private javax.swing.JTextField jTxtCor;
     private javax.swing.JTextField jTxtDescri;
-    private javax.swing.JTextField jTxtLocali;
-    private javax.swing.JTextField jTxtNome;
     // End of variables declaration//GEN-END:variables
 }
