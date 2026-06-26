@@ -32,7 +32,7 @@ public class JDlgMpvClientes extends javax.swing.JDialog {
     }
     
     public void habilitar(){
-        jTxtCodigo.setEnabled(true);
+        jTxtCodigo.setEnabled(false);
         jTxtEmail.setEnabled(true);
         jTxtNome.setEnabled(true);
         jFmtCpf.setEnabled(true);
@@ -258,7 +258,7 @@ public class JDlgMpvClientes extends javax.swing.JDialog {
         if(clientes==null){
             JOptionPane.showInputDialog(this, "usuarios não encontrado!");
         }else{
-            jTxtCodigo.setText(String.valueOf(clientes.getId_cliete()));
+            jTxtCodigo.setText(String.valueOf(clientes.getId_cliente()));
             jTxtNome.setText(clientes.getNome());
             jTxtEmail.setText(clientes.getNome());
             jFmtCpf.setText(clientes.getCpf());
@@ -271,7 +271,7 @@ public class JDlgMpvClientes extends javax.swing.JDialog {
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
         MpvClientes cliente = new MpvClientes();
-        if(alterar) cliente.setId_cliete(Integer.parseInt(jTxtCodigo.getText()));
+        if(alterar) cliente.setId_cliente(Integer.parseInt(jTxtCodigo.getText()));
         cliente.setNome(jTxtNome.getText());
         cliente.setEmail(jTxtEmail.getText());
         cliente.setCpf(jFmtCpf.getText());
@@ -299,7 +299,7 @@ public class JDlgMpvClientes extends javax.swing.JDialog {
         if(clientes==null){
             JOptionPane.showInputDialog(this, "usuarios não encontrado!");
         }else{
-            jTxtCodigo.setText(String.valueOf(clientes.getId_cliete()));
+            jTxtCodigo.setText(String.valueOf(clientes.getId_cliente()));
             jTxtNome.setText(clientes.getNome());
             jTxtEmail.setText(clientes.getNome());
             jFmtCpf.setText(clientes.getCpf());
@@ -318,8 +318,8 @@ public class JDlgMpvClientes extends javax.swing.JDialog {
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
         // TODO add your handling code here:
-        JDlgMpvList jDlgMpvList = new JDlgMpvList(null, true);
-        jDlgMpvList.setTelaUsuario(tela);
+        JDlgMpvClientesTableModel jDlgMpvList = new JDlgMpvClientesTableModel(null, true);
+        jDlgMpvList.setTelaClientes(this);
         jDlgMpvList.setVisible(true);
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 

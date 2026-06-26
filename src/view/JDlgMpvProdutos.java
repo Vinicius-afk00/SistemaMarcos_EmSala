@@ -33,12 +33,12 @@ public class JDlgMpvProdutos extends javax.swing.JDialog {
     
     public void habilitar(){
         jTxtCodigo.setEnabled(false);
-        jTxtDescri.setEnabled(false);
-        jCboTipo.setEnabled(false);
-        jFmtUnidade.setEnabled(false);
-        jFmtPreco.setEnabled(false);
-        jBtnConfirmar.setEnabled(false);
-        jBtnCancelar.setEnabled(false);
+        jTxtDescri.setEnabled(true);
+        jCboTipo.setEnabled(true);
+        jFmtUnidade.setEnabled(true);
+        jFmtPreco.setEnabled(true);
+        jBtnConfirmar.setEnabled(true);
+        jBtnCancelar.setEnabled(true);
         
         jBtnIncluir.setEnabled(false);
         jBtnAlterar.setEnabled(false);
@@ -252,7 +252,7 @@ public class JDlgMpvProdutos extends javax.swing.JDialog {
         if(produto==null){
             JOptionPane.showInputDialog(this, "usuarios não encontrado!");
         }else{
-            jTxtCodigo.setText(String.valueOf(produto.getId_produto()));
+            jTxtCodigo.setText(String.valueOf(produto.getId_produtos()));
             jTxtDescri.setText(produto.getDescricao());
             jCboTipo.setSelectedItem(produto.getTipo());
             jFmtUnidade.setText(produto.getUnidade());
@@ -265,7 +265,7 @@ public class JDlgMpvProdutos extends javax.swing.JDialog {
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
         MpvProdutos produto = new MpvProdutos();
-        if(alterar) produto.setId_produto(Integer.parseInt(jTxtCodigo.getText()));
+        if(alterar) produto.setId_produtos(Integer.parseInt(jTxtCodigo.getText()));
         produto.setDescricao(jTxtDescri.getText());
         produto.setTipo(jCboTipo.getSelectedIndex()+1);
         produto.setUnidade(jFmtUnidade.getText());
@@ -293,7 +293,7 @@ public class JDlgMpvProdutos extends javax.swing.JDialog {
         if(produto==null){
             JOptionPane.showInputDialog(this, "usuarios não encontrado!");
         }else{
-            jTxtCodigo.setText(String.valueOf(produto.getId_produto()));
+            jTxtCodigo.setText(String.valueOf(produto.getId_produtos()));
             jTxtDescri.setText(produto.getDescricao());
             jCboTipo.setSelectedItem(produto.getTipo());
             jFmtUnidade.setText(produto.getUnidade());
@@ -311,8 +311,8 @@ public class JDlgMpvProdutos extends javax.swing.JDialog {
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
         // TODO add your handling code here:
-        JDlgMpvList jDlgMpvList = new JDlgMpvList(null, true);
-        jDlgMpvList.setTelaUsuario(tela);
+        JDlgMpvProdutoTableModel jDlgMpvList = new JDlgMpvProdutoTableModel(null, true);
+        jDlgMpvList.setTelaProduto(this);
         jDlgMpvList.setVisible(true);
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 

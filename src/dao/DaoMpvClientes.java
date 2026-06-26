@@ -40,11 +40,11 @@ public class DaoMpvClientes extends DaoAbstract{
         MpvClientes mpvClientes = (MpvClientes) object;
         try {
             
-            String sql = "INSERT INTO clientes "
+            String sql = "INSERT INTO cliente "
                     + "(id_cliente, nome, cpf, email, telefone)"
                     + " VALUES (?,?,?,?,?);";
             PreparedStatement pst = cnt.prepareStatement(sql);
-            pst.setInt(1, mpvClientes.getId_cliete());
+            pst.setInt(1, mpvClientes.getId_cliente());
             pst.setString(2, mpvClientes.getNome());
             pst.setString(3, mpvClientes.getCpf());
             pst.setString(4, mpvClientes.getEmail());
@@ -63,13 +63,13 @@ public class DaoMpvClientes extends DaoAbstract{
     public void update(Object object) {
         try {
             MpvClientes mpvClientes = (MpvClientes) object;
-            String sql = "UPDATE clientes SET nome=?, cpf=?, email=?, telefone=? WHERE id_cliente=?";
+            String sql = "UPDATE cliente SET nome=?, cpf=?, email=?, telefone=? WHERE id_cliente=?";
             PreparedStatement pst = cnt.prepareStatement(sql);
             pst.setString(1, mpvClientes.getNome());
             pst.setString(2, mpvClientes.getCpf());
             pst.setString(3, mpvClientes.getEmail());
             pst.setString(4, mpvClientes.getTelefone());
-            pst.setInt(5, mpvClientes.getId_cliete());
+            pst.setInt(5, mpvClientes.getId_cliente());
             pst.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DaoMpvClientes.class.getName()).log(Level.SEVERE, null, ex);
@@ -80,9 +80,9 @@ public class DaoMpvClientes extends DaoAbstract{
     public void delete(Object object) {
         try {
             MpvClientes mpvClientes = (MpvClientes) object;
-            String sql = "DELETE FROM clientes WHERE id_cliente=?";
+            String sql = "DELETE FROM cliente WHERE id_cliente=?";
             PreparedStatement smt = cnt.prepareStatement(sql);
-            smt.setInt(1, mpvClientes.getId_cliete());
+            smt.setInt(1, mpvClientes.getId_cliente());
             smt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DaoMpvClientes.class.getName()).log(Level.SEVERE, null, ex);
@@ -92,7 +92,7 @@ public class DaoMpvClientes extends DaoAbstract{
     @Override
     public Object list(int id) {
         try {
-            String sql = "SELECT * FROM clientes WHERE id_cliente=?";
+            String sql = "SELECT * FROM cliente WHERE id_cliente=?";
             MpvClientes cliente = null;
             
             PreparedStatement pst = cnt.prepareStatement(sql);
@@ -102,7 +102,7 @@ public class DaoMpvClientes extends DaoAbstract{
             if(rs.next()){
                 cliente = new MpvClientes();
                 
-                cliente.setId_cliete(rs.getInt("id_cliente"));
+                cliente.setId_cliente(rs.getInt("id_cliente"));
                 cliente.setNome(rs.getString("nome"));
                 cliente.setCpf(rs.getString("cpf"));
                 cliente.setEmail(rs.getString("email"));
@@ -119,7 +119,7 @@ public class DaoMpvClientes extends DaoAbstract{
     public Object listAll() {
         List<MpvClientes> lista = new ArrayList<>();
         try {
-            String sql = "Select * from clientes";
+            String sql = "Select * from cliente";
             
             PreparedStatement smt = cnt.prepareStatement(sql);
             ResultSet rs = smt.executeQuery();
@@ -127,7 +127,7 @@ public class DaoMpvClientes extends DaoAbstract{
             while(rs.next()){
                 MpvClientes cliente = new MpvClientes();
                 
-                cliente.setId_cliete(rs.getInt("id_cliente"));
+                cliente.setId_cliente(rs.getInt("id_cliente"));
                 cliente.setNome(rs.getString("nome"));
                 cliente.setCpf(rs.getString("cpf"));
                 cliente.setEmail(rs.getString("email"));

@@ -9,24 +9,24 @@ package model;
  * @author Vinicius
  */
 public class MpvProdutos {
-    private int id_produto;
+    private int id_produtos;
     private String descricao;
-    private String tipo;
+    private int tipo;
     private String unidade;
     private String preco;
 
     /**
-     * @return the id_produto
+     * @return the id_produtos
      */
-    public int getId_produto() {
-        return id_produto;
+    public int getId_produtos() {
+        return id_produtos;
     }
 
     /**
-     * @param id_produto the id_produto to set
+     * @param id_produtos the id_produtos to set
      */
-    public void setId_produto(int id_produto) {
-        this.id_produto = id_produto;
+    public void setId_produtos(int id_produtos) {
+        this.id_produtos = id_produtos;
     }
 
     /**
@@ -46,14 +46,14 @@ public class MpvProdutos {
     /**
      * @return the tipo
      */
-    public String getTipo() {
+    public int getTipo() {
         return tipo;
     }
 
     /**
      * @param tipo the tipo to set
      */
-    public void setTipo(String tipo) {
+    public void setTipo(int tipo) {
         this.tipo = tipo;
     }
 
@@ -84,4 +84,7 @@ public class MpvProdutos {
     public void setPreco(String preco) {
         this.preco = preco;
     }
+
+    
+
 }

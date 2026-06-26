@@ -42,7 +42,7 @@ public class ProdutoTableModel extends AbstractTableModel{
     public Object getValueAt(int rowIndex, int columnIndex) {
         MpvProdutos produto = (MpvProdutos) this.produtos.get(rowIndex);
         if(columnIndex == 0)
-            return produto.getId_produto();
+            return produto.getId_produtos();
         if(columnIndex == 1)
             return produto.getDescricao();
         if(columnIndex == 2)

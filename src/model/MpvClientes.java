@@ -9,24 +9,24 @@ package model;
  * @author Vinicius
  */
 public class MpvClientes {
-    private int id_cliete;
+    private int id_cliente;
     private String nome;
     private String cpf;
     private String email;
     private String telefone;
 
-    /**
-     * @return the id_cliete
+   /**
+     * @return the id_cliente
      */
-    public int getId_cliete() {
-        return id_cliete;
+    public int getId_cliente() {
+        return id_cliente;
     }
 
     /**
-     * @param id_cliete the id_cliete to set
+     * @param id_cliente the id_cliente to set
      */
-    public void setId_cliete(int id_cliete) {
-        this.id_cliete = id_cliete;
+    public void setId_cliente(int id_cliente) {
+        this.id_cliente = id_cliente;
     }
 
     /**
@@ -84,4 +84,5 @@ public class MpvClientes {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
+
 }

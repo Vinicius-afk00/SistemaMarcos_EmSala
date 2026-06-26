@@ -42,7 +42,7 @@ public class ClienteTableModel extends AbstractTableModel{
     public Object getValueAt(int rowIndex, int columnIndex) {
         MpvClientes cliente = (MpvClientes) this.clientes.get(rowIndex);
         if(columnIndex == 0)
-            return cliente.getId_cliete();
+            return cliente.getId_cliente();
         if(columnIndex == 1)
             return cliente.getNome();
         if(columnIndex == 2)

@@ -42,12 +42,12 @@ public class DaoMpvProdutos extends DaoAbstract{
         try {
             
             String sql = "INSERT INTO produtos "
-                    + "(id_produto, descricao, tipo, unidade, preco)"
+                    + "(id_produtos, descricao, tipo, unidade, preco)"
                     + " VALUES (?,?,?,?,?);";
             PreparedStatement pst = cnt.prepareStatement(sql);
-            pst.setInt(1, mpvProdutos.getId_produto());
+            pst.setInt(1, mpvProdutos.getId_produtos());
             pst.setString(2, mpvProdutos.getDescricao());
-            pst.setString(3, mpvProdutos.getTipo());
+            pst.setInt(3, mpvProdutos.getTipo());
             pst.setString(4, mpvProdutos.getUnidade());
             pst.setString(5, mpvProdutos.getPreco());
             pst.executeUpdate();
@@ -64,11 +64,11 @@ public class DaoMpvProdutos extends DaoAbstract{
     public void update(Object object) {
         try {
             MpvProdutos mpvProdutos = (MpvProdutos) object;
-            String sql = "UPDATE produtos SET descricao=?, tipo=?, unidade=?, preco=? WHERE id_produto=?";
+            String sql = "UPDATE produtos SET descricao=?, tipo=?, unidade=?, preco=? WHERE id_produtos=?";
             PreparedStatement pst = cnt.prepareStatement(sql);
-            pst.setInt(1, mpvProdutos.getId_produto());
+            pst.setInt(1, mpvProdutos.getId_produtos());
             pst.setString(2, mpvProdutos.getDescricao());
-            pst.setString(3, mpvProdutos.getTipo());
+            pst.setInt(3, mpvProdutos.getTipo());
             pst.setString(4, mpvProdutos.getUnidade());
             pst.setString(5, mpvProdutos.getPreco());
             pst.executeUpdate();
@@ -81,9 +81,9 @@ public class DaoMpvProdutos extends DaoAbstract{
     public void delete(Object object) {
         try {
             MpvProdutos mpvProdutos = (MpvProdutos) object;
-            String sql = "DELETE FROM produtos WHERE id_produto=?";
+            String sql = "DELETE FROM produtos WHERE id_produtos=?";
             PreparedStatement smt = cnt.prepareStatement(sql);
-            smt.setInt(1, mpvProdutos.getId_produto());
+            smt.setInt(1, mpvProdutos.getId_produtos());
             smt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DaoMpvProdutos.class.getName()).log(Level.SEVERE, null, ex);
@@ -93,7 +93,7 @@ public class DaoMpvProdutos extends DaoAbstract{
     @Override
     public Object list(int id) {
         try {
-            String sql = "SELECT * FROM produtos WHERE id_produto=?";
+            String sql = "SELECT * FROM produtos WHERE id_produtos=?";
             MpvProdutos produto = null;
             
             PreparedStatement pst = cnt.prepareStatement(sql);
@@ -103,9 +103,9 @@ public class DaoMpvProdutos extends DaoAbstract{
             if(rs.next()){
                 produto = new MpvProdutos();
                 
-                produto.setId_produto(rs.getInt("id_produto"));
+                produto.setId_produtos(rs.getInt("id_produtos"));
                 produto.setDescricao(rs.getString("descricao"));
-                produto.setTipo(rs.getString("tipo"));
+                produto.setTipo(rs.getInt("tipo"));
                 produto.setUnidade(rs.getString("unidade"));
                 produto.setPreco(rs.getString("preco"));
             }
@@ -128,9 +128,9 @@ public class DaoMpvProdutos extends DaoAbstract{
             while(rs.next()){
                 MpvProdutos produto = new MpvProdutos();
                 
-                produto.setId_produto(rs.getInt("id_produto"));
+                produto.setId_produtos(rs.getInt("id_produtos"));
                 produto.setDescricao(rs.getString("descricao"));
-                produto.setTipo(rs.getString("tipo"));
+                produto.setTipo(rs.getInt("tipo"));
                 produto.setUnidade(rs.getString("unidade"));
                 produto.setPreco(rs.getString("preco"));
                 lista.add(produto);
