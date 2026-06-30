@@ -24,7 +24,7 @@ public class JDlgMpvProdutos extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         jTxtCodigo.setEnabled(false);
         jTxtDescri.setEnabled(false);
-        jCboTipo.setEnabled(false);
+        jTxtTipo.setEnabled(false);
         jFmtUnidade.setEnabled(false);
         jFmtPreco.setEnabled(false);
         jBtnConfirmar.setEnabled(false);
@@ -34,7 +34,7 @@ public class JDlgMpvProdutos extends javax.swing.JDialog {
     public void habilitar(){
         jTxtCodigo.setEnabled(false);
         jTxtDescri.setEnabled(true);
-        jCboTipo.setEnabled(true);
+        jTxtTipo.setEnabled(true);
         jFmtUnidade.setEnabled(true);
         jFmtPreco.setEnabled(true);
         jBtnConfirmar.setEnabled(true);
@@ -49,7 +49,7 @@ public class JDlgMpvProdutos extends javax.swing.JDialog {
     public void desabilitar(){
         jTxtCodigo.setEnabled(false);
         jTxtDescri.setEnabled(false);
-        jCboTipo.setEnabled(false);
+        jTxtTipo.setEnabled(false);
         jFmtUnidade.setEnabled(false);
         jFmtPreco.setEnabled(false);
         jBtnConfirmar.setEnabled(false);
@@ -81,11 +81,11 @@ public class JDlgMpvProdutos extends javax.swing.JDialog {
         jTxtDescri = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jCboTipo = new javax.swing.JComboBox<>();
         jFmtUnidade = new javax.swing.JFormattedTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jFmtPreco = new javax.swing.JFormattedTextField();
+        jTxtTipo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -143,8 +143,6 @@ public class JDlgMpvProdutos extends javax.swing.JDialog {
 
         jLabel3.setText("Tipo");
 
-        jCboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel4.setText("Unidade");
 
         jLabel5.setText("Preco");
@@ -161,7 +159,7 @@ public class JDlgMpvProdutos extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTxtDescri))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jCboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTxtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jFmtUnidade))
                     .addGroup(layout.createSequentialGroup()
@@ -208,8 +206,8 @@ public class JDlgMpvProdutos extends javax.swing.JDialog {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFmtUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFmtUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTxtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -254,7 +252,7 @@ public class JDlgMpvProdutos extends javax.swing.JDialog {
         }else{
             jTxtCodigo.setText(String.valueOf(produto.getId_produtos()));
             jTxtDescri.setText(produto.getDescricao());
-            jCboTipo.setSelectedItem(produto.getTipo());
+            jTxtTipo.setText(produto.getTipo());
             jFmtUnidade.setText(produto.getUnidade());
             jFmtPreco.setText(produto.getPreco());
         }
@@ -267,7 +265,7 @@ public class JDlgMpvProdutos extends javax.swing.JDialog {
         MpvProdutos produto = new MpvProdutos();
         if(alterar) produto.setId_produtos(Integer.parseInt(jTxtCodigo.getText()));
         produto.setDescricao(jTxtDescri.getText());
-        produto.setTipo(jCboTipo.getSelectedIndex()+1);
+        produto.setTipo(jTxtTipo.getText());
         produto.setUnidade(jFmtUnidade.getText());
         produto.setPreco(jFmtPreco.getText());
         DaoMpvProdutos dao = new DaoMpvProdutos();
@@ -295,7 +293,7 @@ public class JDlgMpvProdutos extends javax.swing.JDialog {
         }else{
             jTxtCodigo.setText(String.valueOf(produto.getId_produtos()));
             jTxtDescri.setText(produto.getDescricao());
-            jCboTipo.setSelectedItem(produto.getTipo());
+            jTxtTipo.setText(produto.getTipo());
             jFmtUnidade.setText(produto.getUnidade());
             jFmtPreco.setText(produto.getPreco());
 
@@ -365,7 +363,6 @@ public class JDlgMpvProdutos extends javax.swing.JDialog {
     private javax.swing.JButton jBtnExcluir;
     private javax.swing.JButton jBtnIncluir;
     private javax.swing.JButton jBtnPesquisar;
-    private javax.swing.JComboBox<String> jCboTipo;
     private javax.swing.JFormattedTextField jFmtPreco;
     private javax.swing.JFormattedTextField jFmtUnidade;
     private javax.swing.JLabel jLabel1;
@@ -375,5 +372,6 @@ public class JDlgMpvProdutos extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField jTxtCodigo;
     private javax.swing.JTextField jTxtDescri;
+    private javax.swing.JTextField jTxtTipo;
     // End of variables declaration//GEN-END:variables
 }

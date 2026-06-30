@@ -47,7 +47,7 @@ public class DaoMpvProdutos extends DaoAbstract{
             PreparedStatement pst = cnt.prepareStatement(sql);
             pst.setInt(1, mpvProdutos.getId_produtos());
             pst.setString(2, mpvProdutos.getDescricao());
-            pst.setInt(3, mpvProdutos.getTipo());
+            pst.setString(3, mpvProdutos.getTipo());
             pst.setString(4, mpvProdutos.getUnidade());
             pst.setString(5, mpvProdutos.getPreco());
             pst.executeUpdate();
@@ -68,7 +68,7 @@ public class DaoMpvProdutos extends DaoAbstract{
             PreparedStatement pst = cnt.prepareStatement(sql);
             pst.setInt(1, mpvProdutos.getId_produtos());
             pst.setString(2, mpvProdutos.getDescricao());
-            pst.setInt(3, mpvProdutos.getTipo());
+            pst.setString(3, mpvProdutos.getTipo());
             pst.setString(4, mpvProdutos.getUnidade());
             pst.setString(5, mpvProdutos.getPreco());
             pst.executeUpdate();
@@ -105,7 +105,7 @@ public class DaoMpvProdutos extends DaoAbstract{
                 
                 produto.setId_produtos(rs.getInt("id_produtos"));
                 produto.setDescricao(rs.getString("descricao"));
-                produto.setTipo(rs.getInt("tipo"));
+                produto.setTipo(rs.getString("tipo"));
                 produto.setUnidade(rs.getString("unidade"));
                 produto.setPreco(rs.getString("preco"));
             }
@@ -130,7 +130,7 @@ public class DaoMpvProdutos extends DaoAbstract{
                 
                 produto.setId_produtos(rs.getInt("id_produtos"));
                 produto.setDescricao(rs.getString("descricao"));
-                produto.setTipo(rs.getInt("tipo"));
+                produto.setTipo(rs.getString("tipo"));
                 produto.setUnidade(rs.getString("unidade"));
                 produto.setPreco(rs.getString("preco"));
                 lista.add(produto);

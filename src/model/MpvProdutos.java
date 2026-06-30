@@ -11,7 +11,7 @@ package model;
 public class MpvProdutos {
     private int id_produtos;
     private String descricao;
-    private int tipo;
+    private String tipo;
     private String unidade;
     private String preco;
 
@@ -46,14 +46,14 @@ public class MpvProdutos {
     /**
      * @return the tipo
      */
-    public int getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
     /**
      * @param tipo the tipo to set
      */
-    public void setTipo(int tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 
